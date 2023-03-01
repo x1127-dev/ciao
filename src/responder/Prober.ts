@@ -1,13 +1,13 @@
-import assert from "assert";
-import createDebug from "debug";
-import { CiaoService, ServiceState } from "../CiaoService";
-import { DNSPacket, QType } from "../coder/DNSPacket";
-import { Question } from "../coder/Question";
-import { ResourceRecord } from "../coder/ResourceRecord";
-import { EndpointInfo, MDNSServer, SendResultFailedRatio, SendResultFormatError } from "../MDNSServer";
-import { Responder } from "../Responder";
-import * as tiebreaking from "../util/tiebreaking";
-import { rrComparator, TiebreakingResult } from "../util/tiebreaking";
+import assert from "node:assert";
+import { createDebug } from "../deps.ts";
+import { CiaoService, ServiceState } from "../CiaoService.ts";
+import { DNSPacket, QType } from "../coder/DNSPacket.ts";
+import { Question } from "../coder/Question.ts";
+import { ResourceRecord } from "../coder/ResourceRecord.ts";
+import { EndpointInfo, MDNSServer, SendResultFailedRatio, SendResultFormatError } from "../MDNSServer.ts";
+import { Responder } from "../Responder.ts";
+import * as tiebreaking from "../util/tiebreaking.ts";
+import { rrComparator, TiebreakingResult } from "../util/tiebreaking.ts";
 import Timeout = NodeJS.Timeout;
 
 const PROBE_INTERVAL = 250; // 250ms as defined in RFC 6762 8.1.
@@ -79,7 +79,8 @@ export class Prober {
       this.promiseReject = reject;
 
       this.timer = setTimeout(this.sendProbeRequest.bind(this), Math.random() * PROBE_INTERVAL);
-      this.timer.unref();
+      // this.timer.unref();
+      Deno.unrefTimer(this.timer);
     });
   }
 
@@ -193,7 +194,8 @@ export class Prober {
       this.sentQueries++;
 
       this.timer = setTimeout(this.sendProbeRequest.bind(this), this.currentInterval);
-      this.timer.unref();
+      // this.timer.unref();
+      Deno.unrefTimer(this.timer);
 
       this.checkLocalConflicts();
     });
@@ -249,7 +251,8 @@ export class Prober {
     this.serviceEncounteredNameChange = true;
 
     this.timer = setTimeout(this.sendProbeRequest.bind(this), 1000);
-    this.timer.unref();
+    // this.timer.unref();
+    Deno.unrefTimer(this.timer);
   }
 
   handleQuery(packet: DNSPacket, endpoint: EndpointInfo): void {
@@ -309,7 +312,8 @@ export class Prober {
       // wait 1 second and probe again (this is to guard against stale probe packets)
       // If it wasn't a stale probe packet, the other host will correctly respond to our probe queries by then
       this.timer = setTimeout(this.sendProbeRequest.bind(this), 1000);
-      this.timer.unref();
+      // this.timer.unref();
+      Deno.unrefTimer(this.timer);
     } else {
       //debug("Tiebreaking for '%s' detected exact same records on the network. There is actually no conflict!", this.service.getFQDN());
     }

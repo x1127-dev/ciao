@@ -1,11 +1,12 @@
-import assert from "assert";
-import deepEqual from "fast-deep-equal";
-import { AddressInfo } from "net";
-import { dnsTypeToString } from "./dns-string-utils";
-import { DNSLabelCoder, NonCompressionLabelCoder } from "./DNSLabelCoder";
-import { Question } from "./Question";
-import "./records";
-import { ResourceRecord } from "./ResourceRecord";
+import assert from "node:assert";
+import { deepEqual } from "../deps.ts";
+import { AddressInfo } from "node:net";
+import { dnsTypeToString } from "./dns-string-utils.ts";
+import { DNSLabelCoder, NonCompressionLabelCoder } from "./DNSLabelCoder.ts";
+import { Question } from "./Question.ts";
+import "./records/index.ts";
+import { ResourceRecord } from "./ResourceRecord.ts";
+import { Buffer } from "node:buffer";
 
 export const enum OpCode { // RFC 6895 2.2.
   QUERY = 0,
@@ -134,9 +135,9 @@ export interface DNSRecord {
 
 export class DNSPacket {
 
-  public static readonly UDP_PAYLOAD_SIZE_IPV4 = (process.env.CIAO_UPS? parseInt(process.env.CIAO_UPS): 1440);
+  public static readonly UDP_PAYLOAD_SIZE_IPV4 = (Deno.env.get('CIAO_UPS') ? parseInt(Deno.env.get('CIAO_UPS')!): 1440);
   // noinspection JSUnusedGlobalSymbols
-  public static readonly UDP_PAYLOAD_SIZE_IPV6 = (process.env.CIAO_UPS? parseInt(process.env.CIAO_UPS): 1440);
+  public static readonly UDP_PAYLOAD_SIZE_IPV6 = (Deno.env.get('CIAO_UPS') ? parseInt(Deno.env.get('CIAO_UPS')!): 1440);
 
   private static readonly AUTHORITATIVE_ANSWER_MASK = 0x400;
   private static readonly TRUNCATION_MASK = 0x200;

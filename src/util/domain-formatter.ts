@@ -1,7 +1,7 @@
-import assert from "assert";
-import net from "net";
-import { ServiceType } from "../CiaoService";
-import { Protocol } from "../index";
+import assert from "node:assert";
+import net from "node:net";
+import { ServiceType } from "../CiaoService.ts";
+import { Protocol } from "../index.ts";
 
 function isProtocol(part: string): boolean {
   return part === "_" + Protocol.TCP || part === "_" + Protocol.UDP;

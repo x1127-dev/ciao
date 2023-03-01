@@ -9,7 +9,7 @@
  * @param recordB - record b
  * @returns -1 if record a < record b, 0 if record a == record b, 1 if record a > record b
  */
-import { ResourceRecord } from "../coder/ResourceRecord";
+import { ResourceRecord } from "../coder/ResourceRecord.ts";
 
 export function rrComparator(recordA: ResourceRecord, recordB: ResourceRecord): number {
   if (recordA.class !== recordB.class) {

@@ -1,6 +1,6 @@
-import { DNSPacket } from "../coder/DNSPacket";
-import { InterfaceName } from "../NetworkManager";
-import { QueryResponse } from "./QueryResponse";
+import { DNSPacket } from "../coder/DNSPacket.ts";
+import { InterfaceName } from "../NetworkManager.ts";
+import { QueryResponse } from "./QueryResponse.ts";
 import Timeout = NodeJS.Timeout;
 
 /**
@@ -52,7 +52,8 @@ export class QueuedResponse {
 
   public scheduleResponse(callback: () => void): void {
     this.timer = setTimeout(callback, this.delay);
-    this.timer.unref(); // timer doesn't prevent termination
+    // this.timer.unref(); // timer doesn't prevent termination
+    Deno.unrefTimer(this.timer);
   }
 
   public delayWouldBeInTimelyManner(next: QueuedResponse): boolean {

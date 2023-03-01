@@ -1,4 +1,4 @@
-import { QType, RType } from "./DNSPacket";
+import { QType, RType } from "./DNSPacket.ts";
 
 export function dnsTypeToString(type: RType | QType): string {
   switch (type) {

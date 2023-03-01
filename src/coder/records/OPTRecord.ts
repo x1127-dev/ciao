@@ -1,8 +1,8 @@
-import assert from "assert";
-import deepEquals from "fast-deep-equal";
-import { DNSLabelCoder } from "../DNSLabelCoder";
-import { DecodedData, RType } from "../DNSPacket";
-import { RecordRepresentation, ResourceRecord } from "../ResourceRecord";
+import assert from "node:assert";
+import { deepEquals } from "../../deps.ts";
+import { DNSLabelCoder } from "../DNSLabelCoder.ts";
+import { DecodedData, RType } from "../DNSPacket.ts";
+import { RecordRepresentation, ResourceRecord } from "../ResourceRecord.ts";
 
 export interface OPTOption {
   code: number,

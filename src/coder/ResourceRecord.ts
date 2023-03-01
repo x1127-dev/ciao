@@ -1,10 +1,11 @@
-import assert from "assert";
-import createDebug from "debug";
-import { AddressInfo } from "net";
-import { dnsLowerCase } from "../util/dns-equal";
-import { dnsTypeToString } from "./dns-string-utils";
-import { DNSLabelCoder, NonCompressionLabelCoder } from "./DNSLabelCoder";
-import { DecodedData, DNSRecord, OptionalDecodedData, RClass, RType } from "./DNSPacket";
+import assert from "node:assert";
+import { createDebug } from "../deps.ts";
+import { AddressInfo } from "node:net";
+import { dnsLowerCase } from "../util/dns-equal.ts";
+import { dnsTypeToString } from "./dns-string-utils.ts";
+import { DNSLabelCoder, NonCompressionLabelCoder } from "./DNSLabelCoder.ts";
+import { DecodedData, DNSRecord, OptionalDecodedData, RClass, RType } from "./DNSPacket.ts";
+import { Buffer } from "node:buffer";
 
 const debug = createDebug("ciao:decoder");
 

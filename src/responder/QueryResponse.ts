@@ -1,6 +1,6 @@
-import { DNSPacket, PacketType } from "../coder/DNSPacket";
-import { Question } from "../coder/Question";
-import { ResourceRecord } from "../coder/ResourceRecord";
+import { DNSPacket, PacketType } from "../coder/DNSPacket.ts";
+import { Question } from "../coder/Question.ts";
+import { ResourceRecord } from "../coder/ResourceRecord.ts";
 
 export type RecordAddMethod = (...records: ResourceRecord[]) => boolean;
 

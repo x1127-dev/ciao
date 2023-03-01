@@ -1,10 +1,9 @@
-import "source-map-support/register"; // registering node-source-map-support for typescript stack traces
-import createDebug from "debug";
+// import "source-map-support/register"; // registering node-source-map-support for typescript stack traces
+import { createDebug } from "./deps.ts";
+import { version } from "./constants.ts";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const version: string = require("../package.json").version;
-if (version.includes("beta") || process.env.BCT) { // enable debug output if beta version or running bonjour conformance testing
-  const debug = process.env.DEBUG;
+if (version.includes("beta") || Deno.env.get('BCT')) { // enable debug output if beta version or running bonjour conformance testing
+  const debug = Deno.env.get('DEBUG');
   if (!debug || !debug.includes("ciao")) {
     if (!debug) {
       createDebug.enable("ciao:*");
@@ -14,12 +13,12 @@ if (version.includes("beta") || process.env.BCT) { // enable debug output if bet
   }
 }
 
-import "./coder/records/index";
-import { Responder, ResponderOptions } from "./Responder";
+import "./coder/records/index.ts";
+import { Responder, ResponderOptions } from "./Responder.ts";
 
-export * from "./CiaoService";
-export * from "./Responder";
-export { MDNSServerOptions } from "./MDNSServer";
+export * from "./CiaoService.ts";
+export * from "./Responder.ts";
+export type { MDNSServerOptions } from "./MDNSServer.ts";
 
 function printInitInfo() {
   const debug = createDebug("ciao:init");

@@ -1,5 +1,5 @@
-import { EventEmitter } from "events";
-import { DNSPacket } from "../coder/DNSPacket";
+import { EventEmitter } from "node:events";
+import { DNSPacket } from "../coder/DNSPacket.ts";
 import Timeout = NodeJS.Timeout;
 
 export const enum TruncatedQueryResult {

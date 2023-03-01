@@ -1,5 +1,5 @@
-import assert from "assert";
-import createDebug from "debug";
+import assert from "node:assert";
+import { createDebug } from "./deps.ts";
 import {
   CiaoService,
   InternalServiceEvent,
@@ -8,16 +8,16 @@ import {
   ServiceOptions,
   ServiceState,
   UnpublishCallback,
-} from "./CiaoService";
-import { DNSPacket, DNSResponseDefinition, QClass, QType, RType } from "./coder/DNSPacket";
-import { Question } from "./coder/Question";
-import { AAAARecord } from "./coder/records/AAAARecord";
-import { ARecord } from "./coder/records/ARecord";
-import { OPTRecord } from "./coder/records/OPTRecord";
-import { PTRRecord } from "./coder/records/PTRRecord";
-import { SRVRecord } from "./coder/records/SRVRecord";
-import { TXTRecord } from "./coder/records/TXTRecord";
-import { ResourceRecord } from "./coder/ResourceRecord";
+} from "./CiaoService.ts";
+import { DNSPacket, DNSResponseDefinition, QClass, QType, RType } from "./coder/DNSPacket.ts";
+import { Question } from "./coder/Question.ts";
+import { AAAARecord } from "./coder/records/AAAARecord.ts";
+import { ARecord } from "./coder/records/ARecord.ts";
+import { OPTRecord } from "./coder/records/OPTRecord.ts";
+import { PTRRecord } from "./coder/records/PTRRecord.ts";
+import { SRVRecord } from "./coder/records/SRVRecord.ts";
+import { TXTRecord } from "./coder/records/TXTRecord.ts";
+import { ResourceRecord } from "./coder/ResourceRecord.ts";
 import {
   EndpointInfo,
   MDNSServer,
@@ -25,16 +25,16 @@ import {
   PacketHandler,
   SendResultFailedRatio,
   SendResultFormatError,
-} from "./MDNSServer";
-import { InterfaceName, NetworkManagerEvent, NetworkUpdate } from "./NetworkManager";
-import { Announcer } from "./responder/Announcer";
-import { Prober } from "./responder/Prober";
-import { QueryResponse, RecordAddMethod } from "./responder/QueryResponse";
-import { QueuedResponse } from "./responder/QueuedResponse";
-import { TruncatedQuery, TruncatedQueryEvent, TruncatedQueryResult } from "./responder/TruncatedQuery";
-import { ERR_INTERFACE_NOT_FOUND, ERR_SERVER_CLOSED } from "./util/errors";
-import { PromiseTimeout } from "./util/promise-utils";
-import { sortedInsert } from "./util/sorted-array";
+} from "./MDNSServer.ts";
+import { InterfaceName, NetworkManagerEvent, NetworkUpdate } from "./NetworkManager.ts";
+import { Announcer } from "./responder/Announcer.ts";
+import { Prober } from "./responder/Prober.ts";
+import { QueryResponse, RecordAddMethod } from "./responder/QueryResponse.ts";
+import { QueuedResponse } from "./responder/QueuedResponse.ts";
+import { TruncatedQuery, TruncatedQueryEvent, TruncatedQueryResult } from "./responder/TruncatedQuery.ts";
+import { ERR_INTERFACE_NOT_FOUND, ERR_SERVER_CLOSED } from "./util/errors.ts";
+import { PromiseTimeout } from "./util/promise-utils.ts";
+import { sortedInsert } from "./util/sorted-array.ts";
 import Timeout = NodeJS.Timeout;
 
 const debug = createDebug("ciao:Responder");

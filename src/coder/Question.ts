@@ -1,7 +1,7 @@
-import { AddressInfo } from "net";
-import { dnsLowerCase } from "../util/dns-equal";
-import { DNSLabelCoder } from "./DNSLabelCoder";
-import { DecodedData, DNSRecord, QClass, QType } from "./DNSPacket";
+import { AddressInfo } from "node:net";
+import { dnsLowerCase } from "../util/dns-equal.ts";
+import { DNSLabelCoder } from "./DNSLabelCoder.ts";
+import { DecodedData, DNSRecord, QClass, QType } from "./DNSPacket.ts";
 
 export class Question implements DNSRecord {
 

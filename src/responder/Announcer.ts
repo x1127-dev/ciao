@@ -1,16 +1,16 @@
-import assert from "assert";
-import createDebug from "debug";
-import { CiaoService, ServiceState } from "../CiaoService";
-import { DNSPacket } from "../coder/DNSPacket";
-import { ResourceRecord } from "../coder/ResourceRecord";
+import assert from "node:assert";
+import { createDebug } from "../deps.ts";
+import { CiaoService, ServiceState } from "../CiaoService.ts";
+import { DNSPacket } from "../coder/DNSPacket.ts";
+import { ResourceRecord } from "../coder/ResourceRecord.ts";
 import {
   MDNSServer,
   SendResultFailedRatio,
   SendResultFormatError,
   SendTimeoutResult,
   TimedSendResult,
-} from "../MDNSServer";
-import { PromiseTimeout } from "../util/promise-utils";
+} from "../MDNSServer.ts";
+import { PromiseTimeout } from "../util/promise-utils.ts";
 import Timeout = NodeJS.Timeout;
 
 const debug = createDebug("ciao:Announcer");
@@ -90,7 +90,8 @@ export class Announcer {
       this.promiseReject = reject;
 
       this.timer = setTimeout(this.sendAnnouncement.bind(this), 0);
-      this.timer.unref();
+      // this.timer.unref();
+      Deno.unrefTimer(this.timer);
 
       this.nextAnnouncementTime = new Date().getTime();
     }));
@@ -176,7 +177,8 @@ export class Announcer {
         this.promiseResolve!();
       } else {
         this.timer = setTimeout(this.sendAnnouncement.bind(this), this.nextInterval);
-        this.timer.unref();
+        // this.timer.unref();
+        Deno.unrefTimer(this.timer);
 
         this.nextAnnouncementTime = new Date().getTime() + this.nextInterval;
         this.nextInterval *= this.announceIntervalIncreaseFactor;

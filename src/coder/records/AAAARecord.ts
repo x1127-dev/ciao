@@ -1,9 +1,9 @@
-import assert from "assert";
-import net from "net";
-import { enlargeIPv6, shortenIPv6 } from "../../util/domain-formatter";
-import { DNSLabelCoder } from "../DNSLabelCoder";
-import { DecodedData, RType } from "../DNSPacket";
-import { RecordRepresentation, ResourceRecord } from "../ResourceRecord";
+import assert from "node:assert";
+import net from "node:net";
+import { enlargeIPv6, shortenIPv6 } from "../../util/domain-formatter.ts";
+import { DNSLabelCoder } from "../DNSLabelCoder.ts";
+import { DecodedData, RType } from "../DNSPacket.ts";
+import { RecordRepresentation, ResourceRecord } from "../ResourceRecord.ts";
 
 export class AAAARecord extends ResourceRecord {
 

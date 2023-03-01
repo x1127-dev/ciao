@@ -1,8 +1,8 @@
-import assert from "assert";
-import createDebug from "debug";
-import dgram, { Socket } from "dgram";
-import { AddressInfo } from "net";
-import { CiaoService } from "./CiaoService";
+import assert from "node:assert";
+import { createDebug } from "./deps.ts";
+import dgram, { Socket } from "node:dgram";
+import { AddressInfo } from "node:net";
+import { CiaoService } from "./CiaoService.ts";
 import {
   DNSPacket,
   DNSProbeQueryDefinition,
@@ -11,7 +11,7 @@ import {
   OpCode,
   PacketType,
   RCode,
-} from "./coder/DNSPacket";
+} from "./coder/DNSPacket.ts";
 import {
   InterfaceName,
   IPFamily,
@@ -19,10 +19,10 @@ import {
   NetworkManager,
   NetworkManagerEvent,
   NetworkUpdate,
-} from "./NetworkManager";
-import { getNetAddress } from "./util/domain-formatter";
-import { InterfaceNotFoundError, ServerClosedError } from "./util/errors";
-import { PromiseTimeout } from "./util/promise-utils";
+} from "./NetworkManager.ts";
+import { getNetAddress } from "./util/domain-formatter.ts";
+import { InterfaceNotFoundError, ServerClosedError } from "./util/errors.ts";
+import { PromiseTimeout } from "./util/promise-utils.ts";
 
 const debug = createDebug("ciao:MDNSServer");
 

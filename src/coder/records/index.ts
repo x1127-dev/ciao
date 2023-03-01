@@ -1,13 +1,13 @@
-import { RType } from "../DNSPacket";
-import { ResourceRecord } from "../ResourceRecord";
-import { AAAARecord } from "./AAAARecord";
-import { ARecord } from "./ARecord";
-import { CNAMERecord } from "./CNAMERecord";
-import { NSECRecord } from "./NSECRecord";
-import { OPTRecord } from "./OPTRecord";
-import { PTRRecord } from "./PTRRecord";
-import { SRVRecord } from "./SRVRecord";
-import { TXTRecord } from "./TXTRecord";
+import { RType } from "../DNSPacket.ts";
+import { ResourceRecord } from "../ResourceRecord.ts";
+import { AAAARecord } from "./AAAARecord.ts";
+import { ARecord } from "./ARecord.ts";
+import { CNAMERecord } from "./CNAMERecord.ts";
+import { NSECRecord } from "./NSECRecord.ts";
+import { OPTRecord } from "./OPTRecord.ts";
+import { PTRRecord } from "./PTRRecord.ts";
+import { SRVRecord } from "./SRVRecord.ts";
+import { TXTRecord } from "./TXTRecord.ts";
 
 ResourceRecord.typeToRecordDecoder.set(RType.AAAA, AAAARecord.decodeData);
 ResourceRecord.typeToRecordDecoder.set(RType.A, ARecord.decodeData);

@@ -1,5 +1,6 @@
-import assert from "assert";
-import { DecodedData } from "./DNSPacket";
+import assert from "node:assert";
+import { DecodedData } from "./DNSPacket.ts";
+import { Buffer } from "node:buffer";
 
 interface WrittenName {
   name: string;

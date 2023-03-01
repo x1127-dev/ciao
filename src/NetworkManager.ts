@@ -1,11 +1,11 @@
-import assert from "assert";
-import childProcess from "child_process";
-import createDebug from "debug";
-import { EventEmitter } from "events";
-import deepEqual from "fast-deep-equal";
-import net from "net";
-import os, { NetworkInterfaceInfo } from "os";
-import { getNetAddress } from "./util/domain-formatter";
+import assert from "node:assert";
+import childProcess from "node:child_process";
+import { createDebug } from "./deps.ts";
+import { EventEmitter } from "node:events";
+import { deepEqual } from "./deps.ts";
+import net from "node:net";
+import os, { NetworkInterfaceInfo } from "node:os";
+import { getNetAddress } from "./util/domain-formatter.ts";
 import Timeout = NodeJS.Timeout;
 
 const debug = createDebug("ciao:NetworkManager");
@@ -228,7 +228,8 @@ export class NetworkManager extends EventEmitter {
 
   private scheduleNextJob(): void {
     this.currentTimer = setTimeout(this.checkForNewInterfaces.bind(this), NetworkManager.POLLING_TIME);
-    this.currentTimer.unref(); // this timer won't prevent shutdown
+    // this.currentTimer.unref(); // this timer won't prevent shutdown
+    Deno.unrefTimer(this.currentTimer);
   }
 
   private async checkForNewInterfaces(): Promise<void> {
